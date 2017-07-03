@@ -6,7 +6,7 @@ echo your PC will reboot for the changes to be fully applied.
 pause
 
 ::Test If script has Admin Priviledges/is elevated
-AT > NUL
+net session >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
 ECHO you are Administrator
 ) ELSE (
