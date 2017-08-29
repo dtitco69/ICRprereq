@@ -39,8 +39,14 @@ reg add "hklm\system\currentControlSet\Control\Terminal Server" /v "fDenyTSConne
 sc config TermService start= auto
 net start Termservice
 
+::disable updates
+net stop wuauserv
+sc config wuauserv start= disabled
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 1 /f
+
+
 ::Check and add ICR user
-net user | find /i "ICR" || Net user ICR Acce$$2020 /add /fullname:"Tempgp"
+net user | find /i "ICR" || Net user ICR Acce$$2020 /add /fullname:"ICR Solutions"
 net localgroup administrators ICR /add
 
 ::Set ICR to auto login
